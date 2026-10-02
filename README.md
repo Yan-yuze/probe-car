@@ -48,6 +48,9 @@ CyberCAM 上运行本目录的 `cybercam/cybercam_stream.py`，电脑网页从 `
 > 在 **PowerShell 7（`pwsh`）** 下可直接运行；Windows PowerShell 5.1 会把里面的中文注释按 GBK 解读而报语法错。
 > 用 5.1 的话可以先给文件加 BOM，或者直接用 `pwsh -File .\build-stm32.ps1` 执行。
 
+> **实现原理与答辩准备**：每个模块具体是怎么实现的（时钟树、PWM 标定、串口帧解析、I2C 容错、AHT10 数据格式等），
+> 以及 17 道答辩模拟题及答案，见 [`实现原理与答辩准备.md`](实现原理与答辩准备.md)。
+
 ## 1. CyberCAM 图像服务（已部署）
 
 已经将 `cybercam/cybercam_stream.py` 上传到板上的 `/home/pi/probe_car_cybercam/`，安装并启用了 `probe-car-camera.service`。它独占摄像头，输出 320×240、8 FPS、JPEG 质量 50 的 MJPEG 视频，不需要地瓜派或 USB 数据线。电脑已经实测收到有效 JPEG 帧。
