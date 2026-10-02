@@ -1,0 +1,19 @@
+[Unit]
+Description=CyberCAM direct MJPEG stream for probe car
+After=network.target
+Conflicts=mr300c-cybercam.service cybercam-stream.service
+
+[Service]
+Type=simple
+User=pi
+Group=pi
+WorkingDirectory=/home/pi/probe_car_cybercam
+Environment=PYTHONUNBUFFERED=1
+ExecStart=/usr/bin/python3 -u /home/pi/probe_car_cybercam/cybercam_stream.py --http-host 0.0.0.0 --http-port 8081 --width 320 --height 240 --fps 8 --jpeg-quality 50
+Restart=on-failure
+RestartSec=3
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

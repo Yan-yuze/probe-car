@@ -1,0 +1,45 @@
+# ============================================================
+#  探测小车 —— Git 忽略规则
+# ============================================================
+
+# ---------- Keil MDK 编译产物 ----------
+stm32/Objects/
+stm32/Listings/
+stm32/DebugConfig/
+stm32/*.uvguix.*
+stm32/*.scvd
+stm32/*.build_log.htm
+stm32/.vscode/
+*.o
+*.d
+*.crf
+*.dep
+*.lnp
+*.axf
+*.lst
+*.map
+*.bak
+
+# ---------- PlatformIO 编译产物 ----------
+esp32/.pio/
+.pio/
+
+# ---------- Python ----------
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# ---------- 编辑器 / 操作系统 ----------
+.vs/
+.idea/
+.vscode/
+*.swp
+*~
+Thumbs.db
+desktop.ini
+
+# ---------- 本地真实凭据（只在你自己电脑上，别上传）----------
+*.local.txt
+# 想一起上传的话，把下面这行删掉即可
+.workbuddy/

@@ -1,0 +1,14 @@
+# 统一换行符，避免 Windows/Linux 之间互相改行尾导致整文件 diff
+* text=auto eol=lf
+
+# 这些不能当文本处理（改了会坏）
+*.hex   -text
+*.bin   -text
+*.axf   -text
+*.o     -text
+*.a     -text
+*.png   -text
+*.jpg   -text
+*.jpeg  -text
+*.ico   -text
+*.pdf   -text

@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101722">
+  <title>探测小车 · 实时控制台</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark">◈</span><span>探测小车<small>CYBERCAM CONTROL</small></span></div>
+      <div class="top-status"><span id="car-dot" class="dot"></span><span id="car-status">正在检查连接</span></div>
+    </header>
+
+    <main>
+      <section class="intro">
+        <div class="eyebrow">LIVE MISSION PANEL</div>
+        <h1>实时图像与小车控制</h1>
+        <p>直接查看 CyberCAM 回传画面，并通过现有 ESP32 控制接口驱动车辆。</p>
+      </section>
+
+      <div class="layout">
+        <section class="card video-card" aria-labelledby="video-title">
+          <div class="card-heading"><div><span class="section-index">01 / CAMERA</span><h2 id="video-title">CyberCAM 实时画面</h2></div><span id="video-badge" class="badge">连接中</span></div>
+          <div class="video-stage">
+            <img id="video" src="/video.mjpg" alt="CyberCAM 实时图像">
+            <div id="video-overlay" class="video-overlay"><div class="camera-icon">▣</div><span id="video-message">正在连接 CyberCAM…</span></div>
+            <div class="video-corner top-left"></div><div class="video-corner top-right"></div><div class="video-corner bottom-left"></div><div class="video-corner bottom-right"></div>
+          </div>
+          <div class="video-footer"><span><i class="live-pip"></i> LIVE MJPEG</span><span id="video-detail">等待 CyberCAM 数据</span></div>
+        </section>
+
+        <section class="card control-card" aria-labelledby="control-title">
+          <div class="card-heading"><div><span class="section-index">02 / DRIVE</span><h2 id="control-title">手动驾驶</h2></div><span id="stm-badge" class="badge">STM32 待连接</span></div>
+          <p class="control-hint">按住方向键移动，松开立即停车。键盘可用方向键或 W A S D。</p>
+          <div class="dpad" aria-label="小车方向控制">
+            <button class="drive forward" data-command="FORWARD" disabled><span class="arrow">↑</span><span>前进</span><kbd>W</kbd></button>
+            <button class="drive left" data-command="LEFT" disabled><span class="arrow">←</span><span>左转</span><kbd>A</kbd></button>
+            <button class="stop" data-command="STOP"><span class="stop-symbol">■</span><span>停车</span></button>
+            <button class="drive right" data-command="RIGHT" disabled><span class="arrow">→</span><span>右转</span><kbd>D</kbd></button>
+            <button class="drive backward" data-command="BACKWARD" disabled><span class="arrow">↓</span><span>后退</span><kbd>S</kbd></button>
+          </div>
+          <div class="current"><span>当前指令</span><strong id="command">停止</strong></div>
+          <div id="control-message" class="notice" role="status">正在检查 ESP32 与 STM32 状态…</div>
+          <section class="servo-panel" aria-labelledby="servo-title">
+            <div class="servo-heading"><h3 id="servo-title">舵机转向</h3><span id="servo-badge" class="badge">等待连接</span></div>
+            <p class="servo-hint">本舵机是 360° 连续旋转型：<strong>按住才转，松开立即停止</strong>。上电时会自动转一下做自检。</p>
+            <div class="servo-buttons">
+              <button type="button" id="servo-left" disabled>◀ 左转</button>
+              <button type="button" id="servo-stop" disabled>■ 停止</button>
+              <button type="button" id="servo-right" disabled>右转 ▶</button>
+            </div>
+            <div class="current"><span>舵机状态</span><strong id="servo-state">已停止</strong></div>
+            <p id="servo-message" class="servo-message" role="status">正在检查舵机控制状态…</p>
+          </section>
+          <section class="climate-panel" aria-labelledby="climate-title">
+            <div class="climate-heading"><h3 id="climate-title">环境温湿度</h3><span id="climate-badge" class="badge">等待连接</span></div>
+            <div class="climate-values">
+              <div><span>温度</span><strong id="climate-temp">--</strong></div>
+              <div><span>湿度</span><strong id="climate-hum">--</strong></div>
+            </div>
+            <p id="climate-message" class="servo-message" role="status">正在检查 AHT10 传感器…</p>
+          </section>
+        </section>
+      </div>
+
+      <section class="info-grid" aria-label="链路状态">
+        <div class="info-card"><span>图像路径</span><strong>CyberCAM → 电脑热点 → 本网页</strong></div>
+        <div class="info-card"><span>控制路径</span><strong>本网页 → ESP32 → STM32 → 电机</strong></div>
+        <div class="info-card"><span>安全停车</span><strong>ESP32 0.5 秒 / STM32 0.7 秒超时（含舵机）</strong></div>
+      </section>
+    </main>
+    <footer>首次实车测试请架空驱动轮。电脑必须同时能够访问 CyberCAM 和 ESP32。</footer>
+  </div>
+</body>
+</html>
